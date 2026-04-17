@@ -1,5 +1,10 @@
 package pages;
+import java.time.Duration;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class Login  {
@@ -17,8 +22,16 @@ public class Login  {
 
     // Optional: simple page check
     public void getPageTitle() {
-    	System.out.println("title" +driver.getTitle());
+    	System.out.println("title"+ driver.getTitle());
        
     }
+    public void login(String username, String password) {
+    	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-}
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-name"))).sendKeys(username);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("password"))).sendKeys(password);
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("login-button"))).click();
+		System.out.println("Login attempted with username: " + username);
+
+    }
+    }
